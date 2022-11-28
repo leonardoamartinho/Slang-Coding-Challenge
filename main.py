@@ -9,5 +9,8 @@ print(activities_response.url) #confirms url get
 
 if(activities_response.status_code == 200):
     print('Yes!') #Check for sucess in retrieving the endpoint
+    act_res_json = json.loads(activities_response.text) #This will contain the list of "activities"
+    print(act_res_json) #Check for sucess
 
+    grp_id = {}
 
