@@ -68,4 +68,14 @@ if(activities_response.status_code == 200):
         print("Ended at:")
         print(ended_at) #Check for sucess
 
+    start_end = {} #This dictionaru will contain and group user sessions
 
+    for user_id in grpid_actsid:
+        start_end[user_id] = {}
+        start_end[user_id]['acts_id'] = grpid_actsid[user_id]['acts_id'] #Insert IDs
+        start_end[user_id]['started_at'] = started_at[user_id] #Insert start of sessions
+        start_end[user_id]['ended_at'] = ended_at[user_id] #Insert end of sessions
+
+    print("User sessions:")
+    print(start_end) #Check for sucess
+ 
