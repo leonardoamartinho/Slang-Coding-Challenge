@@ -11,7 +11,6 @@ activities_response = requests.get(url_get, headers = header)
 print(activities_response.url) #confirms url get
 
 if(activities_response.status_code == 200):
-    print('Yes!') #Check for sucess in retrieving the endpoint
     act_res_json = json.loads(activities_response.text) #This will contain the list of "activities"
     print('Activities:')
     print(act_res_json) #Check for sucess
@@ -47,7 +46,6 @@ if(activities_response.status_code == 200):
             for acts in act_res_json['activities']:
                 if acts['id'] == act_id:
                     grpid_actsid[user_id][act_id] = acts
-                    print("Added") #Check for sucess
 
     for user_id in grpid_actsid:
         acts_id = [] #Creates new list for activities IDs
@@ -84,11 +82,13 @@ if(activities_response.status_code == 200):
 
     ses_dur = {} #This dictionary will contain sessions duration
 
-    for user_id in start_end:
-        ses_dur[user_id] = datetime.strptime(start_end[user_id]['ended_at'], "%Y-%m-%d %H/%M/%S") - datetime.strptime(start_end[user_id]['started_at'], "%Y-%m-%d %H/%M/%S")
+    #for user_id in start_end:
+    #    ses_dur[user_id] = datetime.strptime(start_end[user_id]['ended_at'], "%Y-%m-%d %H/%M/%S") - datetime.strptime(start_end[user_id]['started_at'], "%Y-%m-%d %H/%M/%S")
 
-    print('Sessions duration:')
-    print(ses_dur) #Check for sucess
+    #print('Sessions duration:')
+    #print(ses_dur) #Check for sucess
 
     url_post = 'https://api.slangapp.com/challenges/v1/activities/sessions'
-    requests.post(url_post, headers = header, json = start_end)
+    requests.post(url_post, headers = header, json = start_end) #Send to the endpoint
+
+
