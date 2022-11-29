@@ -39,8 +39,19 @@ if(activities_response.status_code == 200):
         for act_id in grp_id[user_id]:
             grpid_actsid[user_id][act_id] = {}
 
-            for acts in act_res_json:
+            for acts in act_res_json['activities']:
                 if acts['id'] == act_id:
                     grpid_actsid[user_id][act_id] = acts
+                    print("Added") #Check for sucess
+
+    for user_id in grpid_actsid:
+        acts_id = [] #Creates new list for activities IDs
+
+        for act_id in grpid_actsid[user_id]:
+            acts_id.append(act_id) #Appends activities to new list
+
+        grpid_actsid[user_id]['acts_id'] = acts_id #Inserting IDs
+    
+    print(grpid_actsid) #Check for sucess
 
 
