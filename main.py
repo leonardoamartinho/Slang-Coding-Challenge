@@ -2,6 +2,7 @@ import requests
 import json
 import datetime
 from datetime import datetime
+import time
 
 url_get = "https://api.slangapp.com/challenges/v1/activities"
 header = {'Content-Type': 'application/json', 'Authorization': 'Basic MTQxOjVGZHZTamV1V01MQ0tZcFRySk9TemQ1ZHVKbjdhVm9salNTZmlGUXp6Qk09'}
@@ -84,6 +85,9 @@ if(activities_response.status_code == 200):
     ses_dur = {} #This dictionary will contain sessions duration
 
     for user_id in start_end:
-        ses_dur[user_id] = start_end[user_id]['ended_at'] - start_end[user_id]['started_at']
+        ses_dur[user_id] = time.strptime(start_end[user_id]['ended_at'], '%y/%m/%d %H:%M:%S') - time.strptime(start_end[user_id]['started_at'], '%y/%m/%d %H:%M:%S')
 
- 
+    print('Sessions duration:')
+    print(ses_dur) #Check for sucess
+
+    url_post = 'https://api.slangapp.com/challenges/v1/activities/sessions'
