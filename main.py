@@ -10,6 +10,7 @@ print(activities_response.url) #confirms url get
 if(activities_response.status_code == 200):
     print('Yes!') #Check for sucess in retrieving the endpoint
     act_res_json = json.loads(activities_response.text) #This will contain the list of "activities"
+    print('Activities:')
     print(act_res_json) #Check for sucess
 
     grp_id = {} #This dictionary will contain and group users by their respective IDs
@@ -23,6 +24,7 @@ if(activities_response.status_code == 200):
         
         grp_id[user_id].append(act)
 
+    print('List:')
     print(grp_id) #Check for sucess
 
     for user_id in grp_id:
@@ -52,6 +54,18 @@ if(activities_response.status_code == 200):
 
         grpid_actsid[user_id]['acts_id'] = acts_id #Inserting IDs
     
+    print("New List:")
     print(grpid_actsid) #Check for sucess
+
+    started_at = {} #Creating dictionary for session starting point
+    ended_at = {} #Creating dictionary for session ending point
+
+    for user_id in grpid_actsid:
+        started_at[user_id] = grpid_actsid[user_id][grpid_actsid[user_id]['acts_id'][0]]['first_seen_at'] #Get start of session
+        ended_at[user_id] = grpid_actsid[user_id][grpid_actsid[user_id]['acts_id'][-1]]['first_seen_at'] #Get end of session
+        print("Started at:")
+        print(started_at) #Check for sucess
+        print("Ended at:")
+        print(ended_at) #Check for sucess
 
 
