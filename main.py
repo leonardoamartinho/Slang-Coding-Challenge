@@ -26,22 +26,21 @@ if(activities_response.status_code == 200):
     print(grp_id) #Check for sucess
 
     for user_id in grp_id:
-        act_id = [] #Creates list for activities IDs
+        acts_id = [] #Creates list for activities IDs
         for act in grp_id[user_id]:
-            act_id.append(act['id']) #Appends the activities to the list
-        grp_id[user_id] = act_id
-
-    grpid_actid = {}
+            acts_id.append(act['id']) #Appends the activities to the list
+        grp_id[user_id] = acts_id
+    
+    grpid_actsid = {} #This Dictionary will contain and group activities by their respective IDs
 
     for user_id in grp_id:
-        grpid_actid[user_id] = {}
-
+        grpid_actsid[user_id] = {}
+        
         for act_id in grp_id[user_id]:
-            grpid_actid[user_id][act_id] = {}
+            grpid_actsid[user_id][act_id] = {}
 
-            for activities in act_res_json['id']:
-
-                if(activities['id'] == act_id):
-                    grpid_actid[user_id][act_id] = activities
+            for acts in act_res_json:
+                if acts['id'] == act_id:
+                    grpid_actsid[user_id][act_id] = acts
 
 
